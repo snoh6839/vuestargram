@@ -5,7 +5,7 @@
             <p><span class="accent">100</span>좋아요 </p>
             <p><span class="accent">핀메이트</span></p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt repellendus ducimus laboriosam eos nemo fuga harum magnam autem! Culpa, tempora? Veniam, natus commodi! Iure, libero? Quisquam architecto quas consectetur sint!</p>
-            <p><span class="accent">2023-07-11</span></p>
+            <p><span class="accent">2023-07-11 07:50:43</span></p>
         </div>
     </div>
     <div class="post" v-for="index in $store.state.boardData" :key="index">

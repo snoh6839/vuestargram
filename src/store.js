@@ -6,6 +6,8 @@ const store = createStore({
         return{
             boardData: [],
             lastId: '',
+            tabFlg: 0,
+            imgUrl: '',
         }
     },
     mutations: {
@@ -21,6 +23,12 @@ const store = createStore({
         },
         changeLastId(state, id){
             state.lastId = id;
+        },
+        changeTabFlg(state, num){
+            state.tabFlg = num;
+        },
+        changeImgUrl(state, imgUrl){
+            state.imgUrl = imgUrl;
         }
     },
     actions: {

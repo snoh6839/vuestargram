@@ -5,24 +5,25 @@
   <!-- header -->
   <div class="header">
     <ul>
-      <li class="header-button header-button-left">취소</li>
+      <li v-if="$store.state.tabFlg == 1" @click="$store.commit('changeTabFlg', 0)" class="header-button header-button-left">취소</li>
+      <li v-if="$store.state.tabFlg == 2" @click="$store.commit('changeTabFlg', 1)" class="header-button header-button-left">취소</li>
       <li>
         <img class="logo" src="./assets/img/bin.png" alt="Vue logo">
       </li>
-      <li class="header-button header-button-right">다음</li>
+      <li v-if="$store.state.tabFlg == 1" @click="$store.commit('changeTabFlg', 2)" class="header-button header-button-right">다음</li>
     </ul>
   </div>
 
   <!-- contents -->
   <containerComponent/>
   
-  <button id="moreBtn" @click="$store.dispatch('getMoreList')">More</button>
+  <button v-if="$store.state.tabFlg == 0" id="moreBtn" @click="$store.dispatch('getMoreList')">More</button>
 
   <!-- footer  -->
   <div class="footer">
     <div class="footer-button-store">
       <label for="file" class="label-store"> + </label>
-      <input accept="image/*" type="file" id="file" class="input-file">
+      <input @change="updateImg" accept="image/*" type="file" id="file" class="input-file">
     </div>
   </div>
 </template>
@@ -38,6 +39,14 @@ export default {
   created() {
     this.$store.dispatch('getMainList');
   },
+  methods: {
+    updateImg(e){
+      let file = e.target.files;
+      let imgUrl = URL.createObjectURL(file[0]);
+      this.$store.commit('changeImgUrl', imgUrl);
+      this.$store.commit('changeTabFlg', 1);
+    }
+  }
 }
 </script>
 

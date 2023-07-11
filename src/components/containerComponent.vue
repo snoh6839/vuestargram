@@ -5,18 +5,19 @@
     </div>
     <!-- image filter -->
     <div v-if="$store.state.tabFlg == 1">
-        <div class="upload-img" :style="{ backgroundImage: `url('${$store.state.imgUrl}')` }"></div>
+        <div class="upload-img" :class="$store.state.filter" :style="{ backgroundImage: `url('${$store.state.imgUrl}')` }"></div>
         <div class="filter-box">
-            <div class="filter" :class="index" v-for="index in filterList" :key="index" :style="{ backgroundImage: `url('${$store.state.imgUrl}')` }">
+            <div class="filter" @click="$store.commit('changeFilter', index)" :class="index" v-for="index in filterList" :key="index" :style="{ backgroundImage: `url('${$store.state.imgUrl}')` }">
                 <span>
                     {{ index }}
                 </span>
             </div>
+
         </div>
     </div>
     <!-- write -->
     <div v-if="$store.state.tabFlg == 2">
-        <div class="upload-img" :style="{ backgroundImage: `url('${$store.state.imgUrl}')` }"></div>
+        <div class="upload-img" :class="$store.state.filter" :style="{ backgroundImage: `url('${$store.state.imgUrl}')` }"></div>
         <div>
             <textarea class="write-box" name="content" id="content" placeholder="글 작성 공간"></textarea>
         </div>

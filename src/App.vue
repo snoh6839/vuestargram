@@ -5,7 +5,7 @@
   <!-- header -->
   <div class="header">
     <ul>
-      <li v-if="$store.state.tabFlg == 1" @click="$store.commit('changeTabFlg', 0)" class="header-button header-button-left">취소</li>
+      <li v-if="$store.state.tabFlg == 1" @click="$store.commit('changeTabFlg', 0); $store.commit('clearState');" class="header-button header-button-left">취소</li>
       <li v-if="$store.state.tabFlg == 2" @click="$store.commit('changeTabFlg', 1)" class="header-button header-button-left">취소</li>
       <li>
         <img class="logo" src="./assets/img/bin.png" alt="Vue logo">
@@ -45,6 +45,7 @@ export default {
       let imgUrl = URL.createObjectURL(file[0]);
       this.$store.commit('changeImgUrl', imgUrl);
       this.$store.commit('changeTabFlg', 1);
+      e.target.value = '';
     }
   }
 }

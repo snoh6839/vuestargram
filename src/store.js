@@ -8,6 +8,7 @@ const store = createStore({
             lastId: '',
             tabFlg: 0,
             imgUrl: '',
+            imgFilter: '',
         }
     },
     mutations: {
@@ -29,6 +30,13 @@ const store = createStore({
         },
         changeImgUrl(state, imgUrl){
             state.imgUrl = imgUrl;
+        },
+        changeFilter(state, imgFilter){
+            state.filter = imgFilter;
+        },
+        clearState(state){
+            state.imgUrl = '';
+            state.filter = '';
         }
     },
     actions: {

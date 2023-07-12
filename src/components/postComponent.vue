@@ -10,7 +10,7 @@
     </div>
     <div class="post" v-for="index in $store.state.boardData" :key="index">
         
-        <div class="post-img" :style="{backgroundImage : `url('${index.img}')`}">
+        <div class="post-img" :class="index.filter" :style="{backgroundImage : `url('${index.img}')`}">
         </div>
         
         <div class="post-content" >

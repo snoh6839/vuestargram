@@ -11,6 +11,7 @@
         <img class="logo" src="./assets/img/bin.png" alt="Vue logo">
       </li>
       <li v-if="$store.state.tabFlg == 1" @click="$store.commit('changeTabFlg', 2)" class="header-button header-button-right">다음</li>
+      <li v-if="$store.state.tabFlg == 2" @click="$store.dispatch('writeContent'); $store.commit('changeTabFlg', 0)" class="header-button header-button-right">작성</li>
     </ul>
   </div>
 

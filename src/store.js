@@ -64,6 +64,15 @@ const store = createStore({
                 .catch( err => {
                     console.log(err)
                 })
+        },
+        writeContent(context){
+            axios.post('http://192.168.0.66/api/boards')
+                .then(res => {
+                    //받아온 데이터 저장 처리
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         }
     },
 })

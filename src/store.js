@@ -23,6 +23,9 @@ const store = createStore({
             state.boardData.push(data);
             this.commit('changeLastId', data.id);
         },
+        addWriteData(state, data) {
+            state.boardData.unshift(data);
+        },
         changeLastId(state, id){
             state.lastId = id;
         },
@@ -44,6 +47,7 @@ const store = createStore({
         clearState(state){
             state.imgUrl = '';
             state.filter = '';
+            state.content = '';
         },
         
     },
@@ -93,16 +97,11 @@ const store = createStore({
 
             axios.post('http://192.168.0.66/api/boards', uploadData, header)
                 .then(res => {
-                    // console.log(res);
-                    context.state.boardData.unshift(res.uploadData);
+                    context.commit('addWriteData', res.data);
                     context.commit('changeTabFlg', 0);
-                    // context.commit('addBoardData', res.uploadData);
-                    // window.onload = context.commit('createData', res.uploadData);
-                    // console.log(imgFilter, uploadFile, contentText)
-                    
                 })
                 .catch(err => {
-                    console.log(imgFilter, uploadFile, contentText, err)
+                    console.log(err)
                 })
         }
     },

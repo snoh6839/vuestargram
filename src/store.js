@@ -9,6 +9,7 @@ const store = createStore({
             tabFlg: 0,
             imgUrl: '',
             imgFilter: '',
+            contentText: '',
         }
     },
     mutations: {
@@ -68,12 +69,13 @@ const store = createStore({
         writeContent(context){
             axios.post('http://192.168.0.66/api/boards', {
                 name: '노수빈', //고정
-                filter: 선택한 필터, //값 받아오기
-                img: 파일, //값 받아오기
-                content: 적은 내용, //값 받아오기
+                filter: imgFilter, //값 받아오기
+                img: imgUrl, //값 받아오기
+                content: contentText, //값 받아오기
             })
                 .then(res => {
                     //받아온 데이터 저장 처리
+                    context.commit('addBoardData', res.data)
                 })
                 .catch(err => {
                     console.log(err)

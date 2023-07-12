@@ -7,7 +7,7 @@
     <div v-if="$store.state.tabFlg == 1">
         <div class="upload-img" :class="$store.state.filter" :style="{ backgroundImage: `url('${$store.state.imgUrl}')` }"></div>
         <div class="filter-box">
-            <div class="filter" @click="$store.commit('changeFilter', index)" :class="index" v-for="index in filterList" :key="index" :style="{ backgroundImage: `url('${$store.state.imgUrl}')` }">
+            <div class="filter" @click="$store.commit('changeFilter', index);" :class="index" v-for="index in filterList" :key="index" :style="{ backgroundImage: `url('${$store.state.imgUrl}')` }">
                 <span>
                     {{ index }}
                 </span>

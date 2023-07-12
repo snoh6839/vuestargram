@@ -29,6 +29,9 @@ const store = createStore({
         changeTabFlg(state, num){
             state.tabFlg = num;
         },
+        uploadFile(state, uploadFile){
+            state.uploadFile = uploadFile;
+        },
         changeImgUrl(state, imgUrl){
             state.imgUrl = imgUrl;
         },
@@ -38,7 +41,8 @@ const store = createStore({
         clearState(state){
             state.imgUrl = '';
             state.filter = '';
-        }
+        },
+        
     },
     actions: {
         getMainList(context) {
@@ -67,22 +71,25 @@ const store = createStore({
                 })
         },
         writeContent(context){
-
             const header = {
                 headers: {
                     'Content-Type' : 'multipart/form-data',
                 }
             }
-            axios.post('http://192.168.0.66/api/boards', {
+
+            const imgFilter = context.filter;
+            const uploadFile = context.uploadFile;
+            const contentText = context.content;
+
+            const uploadData = {
                 name: '노수빈', //고정
                 filter: imgFilter, //값 받아오기
-                img: imgUrl, //값 받아오기
+                img: uploadFile, //값 받아오기.. url 대신 파일 받아오기
                 content: contentText, //값 받아오기
-            }, header)
-                .then(res => {
-                    //받아온 데이터 저장 처리
-                    context.commit('addBoardData', res.data)
-                })
+            }
+
+            axios.post('http://192.168.0.66/api/boards', uploadData, header)
+                .then(res => context.id = res.data.id)
                 .catch(err => {
                     console.log(err)
                 })

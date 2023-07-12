@@ -67,12 +67,18 @@ const store = createStore({
                 })
         },
         writeContent(context){
+
+            const header = {
+                headers: {
+                    'Content-Type' : 'multipart/form-data',
+                }
+            }
             axios.post('http://192.168.0.66/api/boards', {
                 name: '노수빈', //고정
                 filter: imgFilter, //값 받아오기
                 img: imgUrl, //값 받아오기
                 content: contentText, //값 받아오기
-            })
+            }, header)
                 .then(res => {
                     //받아온 데이터 저장 처리
                     context.commit('addBoardData', res.data)

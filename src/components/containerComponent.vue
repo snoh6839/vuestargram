@@ -19,7 +19,7 @@
     <div v-if="$store.state.tabFlg == 2">
         <div class="upload-img" :class="$store.state.filter" :style="{ backgroundImage: `url('${$store.state.imgUrl}')` }"></div>
         <div>
-            <textarea class="write-box" name="content" id="content" placeholder="글 작성 공간"></textarea>
+            <textarea class="write-box" name="content" id="content" placeholder="글 작성 공간" @change="updateContent"></textarea>
         </div>
     </div>
 </template>
@@ -36,6 +36,12 @@ export default {
     },
     components: {
         postComponent,
+    },
+    methods: {
+        updateContent(e) {
+            let contentText = e.target.value;
+            this.$store.commit('changeContent', contentText);
+        }
     }
 }
 </script>

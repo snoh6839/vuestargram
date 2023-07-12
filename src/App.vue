@@ -11,7 +11,7 @@
         <img class="logo" src="./assets/img/bin.png" alt="Vue logo">
       </li>
       <li v-if="$store.state.tabFlg == 1" @click="$store.commit('changeTabFlg', 2)" class="header-button header-button-right">다음</li>
-      <li v-if="$store.state.tabFlg == 2" @click="$store.dispatch('writeContent'); $store.commit('changeTabFlg', 0);" class="header-button header-button-right">작성</li>
+      <li v-if="$store.state.tabFlg == 2" @click="$store.dispatch('writeContent'); " class="header-button header-button-right">작성</li>
     </ul>
   </div>
 
@@ -44,11 +44,14 @@ export default {
     updateImg(e){
       let file = e.target.files;
       let uploadFile = file[0];
+      // let contentText = content;
       let imgUrl = URL.createObjectURL(uploadFile);
       this.$store.commit('uploadFile', uploadFile);
       this.$store.commit('changeImgUrl', imgUrl);
       this.$store.commit('changeTabFlg', 1);
+      // this.$store.commit('changeContent', contentText);
       e.target.value = '';
+      
     }
   }
 }

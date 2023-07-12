@@ -38,6 +38,9 @@ const store = createStore({
         changeFilter(state, imgFilter){
             state.filter = imgFilter;
         },
+        changeContent(state, contentText) {
+            state.content = contentText;
+        },
         clearState(state){
             state.imgUrl = '';
             state.filter = '';
@@ -77,9 +80,9 @@ const store = createStore({
                 }
             }
 
-            const imgFilter = context.filter;
-            const uploadFile = context.uploadFile;
-            const contentText = context.content;
+            const imgFilter = context.state.filter;
+            const uploadFile = context.state.uploadFile;
+            const contentText = context.state.content;
 
             const uploadData = {
                 name: '노수빈', //고정
@@ -89,9 +92,17 @@ const store = createStore({
             }
 
             axios.post('http://192.168.0.66/api/boards', uploadData, header)
-                .then(res => context.id = res.data.id)
+                .then(res => {
+                    // console.log(res);
+                    context.state.boardData.unshift(res.uploadData);
+                    context.commit('changeTabFlg', 0);
+                    // context.commit('addBoardData', res.uploadData);
+                    // window.onload = context.commit('createData', res.uploadData);
+                    // console.log(imgFilter, uploadFile, contentText)
+                    
+                })
                 .catch(err => {
-                    console.log(err)
+                    console.log(imgFilter, uploadFile, contentText, err)
                 })
         }
     },
